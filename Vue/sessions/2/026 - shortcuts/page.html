@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+      <button @click="changeLink">Click to Change the link</button>
+      <a :href="link">Page</a>
+    </div>
+    
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            title: 'Hello World! 123',
+            link: 'https://google.com/'//the v-bind can be delete 
+            //and vue continue to undestand :href
+            //v-on: can be substituted for @
+          },
+          methods: {
+            changeLink: function(){
+                return this.link = 'https://apple.com/';
+            }
+          }
+        });
+    </script>
+</body>
+
+
+

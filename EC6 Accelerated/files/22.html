@@ -1,0 +1,31 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            class Person {
+                greet() {
+                    this.name = "Max"; // this is how you set up properties!
+                    console.log('Hello!');
+                }
+            }
+            let person = new Person();
+            person.greet(); // prints ‘Hello!’
+            class Max extends Person {
+                constructor(name) {
+                    super();
+                    this.name = name;   
+                }
+            }
+            let max = new Max("Maximiliam");
+            console.log(max.name);//prints 'Maximiliam'
+            class Helper {
+                static log(message) {
+                    console.log(message);
+                }
+            }
+            Helper.log("teste")//prints 'teste'
+        </script>
+    </body>
+</html>

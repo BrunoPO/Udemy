@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <p>{{ sayHello() }}</p> 
+    </div>
+    
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            title: 'Hello World! 123'
+          },
+          methods: {
+            sayHello: function(){
+                return "Hello";
+            }
+          }
+        });
+    </script>
+</body>
+
+
+

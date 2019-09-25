@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <h1 v-once>{{ title }}</h1>
+         <p>{{ sayHello() }}</p> - <a v-bind:href="link">Google</a>
+         <hr>
+         <p v-html="finishedLink"></p>
+    </div>
+    
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            title: 'Hello World! 123',
+            link: 'https://www.google.com/',
+            finishedLink: '<a href="https://www.google.com/">Google</a>'
+            //por definição o Vue apenas imprime texto.
+            //O v-html permite que um elemento html seja adicionado a pagina
+          },
+          methods: {
+            sayHello: function(){
+                
+                this.title = "Hello";
+                return this.title;
+            }
+          }
+        });
+    </script>
+</body>
+
+
+

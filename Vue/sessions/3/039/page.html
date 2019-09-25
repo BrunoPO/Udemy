@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(ingredient, i) in ingredientes" :key="ingredient">{{ ingredient }} ({{ i }})</li>
+        </ul>
+        <button @click="ingredientes.push('spices')">Add</button>
+        <hr>
+        <ul>
+            <li v-for="person in persons">
+                <div v-for="(value, key, index) in person">
+                    {{value}}: {{key}} [{{index}}]
+                </div>
+            </li>
+        </ul>
+        <hr>
+        <span v-for=" n in 10"> {{n}} ,</span>
+        <hr>
+        <template v-for="(ingredient, index) in ingredientes">
+                <h1>{{ ingredient }} </h1>
+                <p> ({{ index }})</li>
+        </template>
+    </div>
+    
+    <script>
+        new Vue({
+            //v-for= item in list
+            //v-for= (item, index) in list
+            //v-for= value in obj
+            //v-for= (value, key, index) in obj
+            //take care on the order of the parameters
+            
+            //On case of a dynamic add/modify itens on the list it's interesting to use :key to create a id
+            //Cuz the list is seen as a reference
+            //, so sometimes the list can be modify and the vue not see it, to garatee that this unexpected behavior shows up it's necessary to use :key
+            el: '#app',
+            data: {
+                ingredientes: ['meat','fruit','cookies'],
+                persons: [
+                    {name: 'Max', age: 27, color: 'red'},
+                    {name: 'Anna', age: 'unknown', color: 'blue'}
+                ]
+            }
+        });
+    </script>
+</body>

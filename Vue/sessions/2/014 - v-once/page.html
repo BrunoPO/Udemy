@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <h1 v-once>{{ title }}</h1>
+         <p>{{ sayHello() }}</p> - <a v-bind:href="link">Google</a>
+    </div>
+    
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            title: 'Hello World! 123',
+            link: 'https://www.google.com/'
+          },
+          methods: {
+            sayHello: function(){
+                //O v-once impede que o <p> seja re-redenrizado
+                this.title = "Hello";
+                return this.title;
+            }
+          }
+        });
+    </script>
+</body>
+
+
+

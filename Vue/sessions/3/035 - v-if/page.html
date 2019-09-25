@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="show">You can see me<span>, child</span> </p>
+        <p v-else>Now, you can see me!</p>
+        <p>Do you also see me?</p>
+        <button @click="show = !show"> Switch </button>
+    </div>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: true//v-if attach or unatach (it does not hide) a element on html lefting just a commentline
+            }
+        });
+    </script>
+</body>

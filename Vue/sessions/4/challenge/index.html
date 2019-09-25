@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <script src="../../../libs/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" 
+                style="background-color: green; margin: 0; color: white;"
+                :style="{width: playerLife + '%'}"
+                ></div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" 
+                style="background-color: green; margin: 0; color: white;"
+                :style="{width: monsterLife + '%'}"
+                ></div>
+            </div>
+        </div>
+    </section>
+    <section v-if="!gameIsRunning" class="row controls">
+        <div class="small-12 columns">
+            <button id="start-game" @click= "cleanGame" >START NEW GAME</button>
+        </div>
+    </section>
+    <section v-else class="row controls">
+        <div class="small-12 columns">
+            <button id="attack" @click="attack">ATTACK</button>
+            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal"  @click="heal">HEAL</button>
+            <button id="give-up" @click="cleanGame" >GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log" v-if="combatHistory.length > 0">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="turn in combatHistory" :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+                    {{turn.msg}}
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+    
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        gameIsRunning: false,
+        playerLife: 100,
+        monsterLife: 100,
+        combatHistory: []
+    },
+    methods:{
+        _attack: function(myBase, mnstBase){
+            var myAttack = this.calculateValue(myBase);
+            var mnstAttack = this.calculateValue(mnstBase);
+
+            this.monsterLife -= myAttack;
+            this.combatHistory.unshift({
+                isPlayer: true,
+                msg:'Player hits monster for '+myAttack,
+                value: myAttack
+            });
+
+            if(this.checkWin()){
+                return;
+            }
+
+            this.playerLife -= mnstAttack;
+            this.combatHistory.unshift({
+                isPlayer: false,
+                msg:'Monster hits player for '+mnstAttack,
+                value: mnstAttack
+            });
+
+            this.checkLose();
+        },
+        calculateValue: function(base){
+            return Math.floor(Math.random() * base)+1;
+        },
+        attack: function(){
+            this._attack(8,10);
+        },
+        specialAttack: function(){
+            this._attack(15,10);
+        },
+        heal: function(){
+            var myHeal = this.calculateValue(15);
+            var mnstAttack = this.calculateValue(8);
+            
+            this.playerLife += myHeal;
+            this.playerLife = (this.playerLife>100)?100:this.playerLife;
+            this.combatHistory.unshift({
+                isPlayer: true,
+                msg:'Player heal for '+myHeal,
+                value: myHeal
+            });
+
+            this.playerLife -= mnstAttack;
+            this.combatHistory.unshift({
+                isPlayer: false,
+                msg:'Monster hits player for '+mnstAttack,
+                value: mnstAttack
+            });
+
+            this.checkLose();
+        },
+        reset: function(){
+            this.playerLife = 100;
+            this.monsterLife = 100;
+            this.combatHistory = [];
+        },
+        cleanGame: function(){
+            this.gameIsRunning = !this.gameIsRunning;
+            this.reset();
+        },
+        checkWin: function(){
+            if(this.monsterLife < 1){
+                if(confirm("You won! Play again?")){
+                    this.reset();
+                }else{
+                    this.gameIsRunning = false;
+                }
+                return true;
+            }
+        },
+        checkLose: function(){
+            if(this.playerLife < 1){
+                if(confirm("You lose! Play again?")){
+                    this.reset();
+                }else{
+                    this.gameIsRunning = false;
+                }
+            }
+        }
+    }
+});
+</script>
+</body>
+</html>

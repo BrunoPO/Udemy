@@ -1,0 +1,38 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            let width = 10;
+            let length = 50;
+            let lengthField = 'length';
+            rectangle = {
+                width, // width is automatically assigned => takes above value
+                [lengthField]: length, // Dynamic field name using variable
+                "outputSize"() { // shorter syntax + possibility of string name
+                    console.log(this.width * this.length); // this refers to object
+                }
+            };
+            console.log(rectangle);//prints obj
+
+            let ids = [1, 2, 3, 4, 5, 6];
+            console.log(Math.max(...ids)); // prints 6
+
+            let testResults = [5.30, 2.84, 9.11, 1.01, 3.99];
+            for (let testResult of testResults) {
+                if (testResult > 5) {
+                    console.log(testResult); // prints 5.30, 9.11
+                }
+            }
+
+            let person = {name: 'Max', age: 27};
+            let {name, age} = person;
+            description = `
+            This is a description, which may wrap across multiple lines.
+            Written by ${name}.
+            `;
+            console.log(description); // This is a description, which may wrap across multiple lines.  Written by Max.
+        </script>
+    </body>
+</html>

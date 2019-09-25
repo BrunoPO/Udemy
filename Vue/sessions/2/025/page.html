@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="counter++">Increase</button>
+        <button v-on:click="counter--">Decrease</button>
+        <button v-on:click="secondCounter++">Increase Second</button>
+        <p>Counter: {{ counter }} | {{secondCounter}}</p>
+        <p>Counter: {{ result() }} | {{output}}</p>
+    </div>
+    
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            counter: 0,
+            secondCounter: 0
+          },
+          computed: {//used when need a sync answer (without any request to server)
+          //is recommended to used as ever as possible.
+            output: function(){
+              console.log("computed");
+              return (this.counter>5)?'Greater than 5':'Smaller than 5';
+            }
+          },
+          watch:{
+            counter: function(value){//used to async process
+              var vm = this;//we will use a cloused, so to have acess to the vue component
+              //we need to store it into a varible.
+              setTimeout(function(){//Take care with async funcs,
+              //It will be called at every change so even after you stop it will still impact the experience
+                vm.counter = 0;
+              },2000);
+            }
+          },
+          methods: {
+            result: function(step, event){
+              console.log("method");
+              return (this.counter>5)?'Greater than 5':'Smaller than 5';
+            }
+          }
+        });
+    </script>
+</body>
+
+
+

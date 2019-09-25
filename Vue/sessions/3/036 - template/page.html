@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="show">You can see me<span>, child</span> </p>
+        <p v-else>Now, you can see me!</p>
+        <template v-if="show">
+            <h1>Heading</h1>
+            <p>Inside a template</p>
+        </template>
+        <p v-show="show">Do you also see me?</p>
+        <button @click="show = !show"> Switch </button>
+    </div>
+    
+    <script>
+        new Vue({
+            //Template serves to group as Div tag, however this is not rendered on the client side
+            //v-show serves to hide or show an element.
+                //The element still there but with a style={display:none}
+            // it's good pratice to use v-if knowing that it is better performace, cuz let less elem. on the dom
+            el: '#app',
+            data: {
+                show: true
+            }
+        });
+    </script>
+</body>

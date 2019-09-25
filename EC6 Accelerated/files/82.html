@@ -1,0 +1,20 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+        class Person {}
+        let person = Reflect.construct(Person, []);
+
+        let config = {
+            greet() {
+                console.log("Hello there!");
+            }
+        };
+        Reflect.setPrototypeOf(person, config);
+
+        Reflect.apply(person.greet, person, []);
+        </script>
+    </body>
+</html>

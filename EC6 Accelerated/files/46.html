@@ -1,0 +1,43 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            let array = [1, 2, 3];
+            let iteratorT = array[Symbol.iterator]();
+            console.log(iteratorT.next()); // prints {done: false, value: 1}
+
+            let iterableObj = {
+                [Symbol.iterator]() {
+                    let nextVal = 5;
+                    return {
+                        next() {
+                            return {
+                                value: nextVal++,
+                                done: false
+                            };
+                        }
+                    };
+                }
+            };
+
+            let iterator2 = iterableObj[Symbol.iterator]();
+            console.log(iterator2.next()); // {done: false, value: 5}
+            
+            //Gennerator ------
+            function* select() {
+                yield "House Data";
+                yield "Test Data";
+                yield "Person Data";
+            }
+
+            let iterator3 = select();
+            console.log(iterator3.next()); // prints House Data
+            console.log(iterator3.next()); // prints Test Data
+            console.log(iterator3.next()); // prints Person Data
+            console.log(iterator3.next()); // prints undefined
+
+        </script>
+    </body>
+</html>

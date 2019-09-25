@@ -1,0 +1,20 @@
+<script src="../../../libs/vue.js"></script>
+
+<div id="app1">
+  <h1 ref="heading">{{ title }}</h1>
+  <button @click="show" ref="myButton">Show Paragraph</button>
+  <p v-if="showParagraph">This is not always visible</p>
+  <hello></hello>
+  <hello></hello>
+</div>
+
+<div id="app2">
+  <h1 ref="heading">{{ title }}</h1>
+  <button @click="onChange">Show Paragraph</button>
+</div>
+
+<div id="app3">
+
+</div>
+
+<script src="app.js"></script>

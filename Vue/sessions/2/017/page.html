@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <script src="../../../libs/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <p>{{ sayHello() }}</p> - <a v-bind:href="link">Google</a>
+    </div>
+    
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            title: 'Hello World! 123',
+            link: 'https://www.google.com/'
+            //O vue só traduz comandos que sejam texto e estajam entre {{}}
+            //O camando v-bind se faz nescessário para o vue entenda que o texto dentro das "" deve ser processado.
+          },
+          methods: {
+            sayHello: function(){
+                return this.title;
+            }
+          }
+        });
+    </script>
+</body>
+
+
+
